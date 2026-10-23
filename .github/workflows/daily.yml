@@ -2,7 +2,9 @@ name: Daily housing lottery alerts
 
 on:
   schedule:
-    - cron: "17 15 * * *"   # every day around 8:17am Pacific / 11:17am Eastern
+    # GitHub starts scheduled jobs late (observed: up to ~4 hours), so this is set early on
+    # purpose. 13:17 UTC = 6:17am Pacific / 9:17am Eastern in daylight time (5:17am Pacific in winter).
+    - cron: "17 13 * * *"
   workflow_dispatch: {}      # lets you run it by hand from the Actions tab
 
 permissions:

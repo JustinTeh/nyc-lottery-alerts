@@ -20,14 +20,8 @@ Live runs only log match counts, so your income never appears in the (public) Ac
 - `household_size`, `annual_income`: sent to Housing Connect's own search, which returns lotteries whose income range includes you. `assets` is printed in each digest as a reminder (the list data has no asset limits).
 - `exclude_boroughs`: `["SI"]` skips Staten Island.
 - `bedrooms`: studio and 1br. A lottery must have at least one unit of these sizes.
-- `likely_bands`, `maybe_bands`: how the city feed's income bands are tagged. Units in the 121%+ AMI bands (`middle`, `above`) give **LIKELY FIT**. Only the mixed 81-120% band (`moderate`) gives **CHECK INCOME**. If the feed shows every unit in a lower band than you, the lottery is dropped.
+- `likely_bands`, `maybe_bands`: how the city feed's income bands are tagged. 
 - `reminder_days`: re-alerts you when a lottery you already saw is this many days from closing.
-
-## Tags in the digest
-
-- **LIKELY FIT**: the city feed shows units in your higher income bands.
-- **CHECK INCOME**: only a few units are in a mixed band, and some may cap below your income.
-- **NOT IN CITY DATA**: the lottery is open on Housing Connect but not in the city feed yet, so there are no band details.
 
 ## Run it locally
 

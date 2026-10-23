@@ -6,7 +6,7 @@ Once a day this makes **one request** to Housing Connect: the same search the we
 
 1. Fork or copy this repo.
 2. Copy `config.example.json` to `config.local.json` and fill in your numbers. `config.local.json` is git-ignored, so your income and assets never get committed.
-3. Pick a private ntfy topic name, for example `nyc-housing-` plus a few random characters (anyone who knows it can read it, so make it hard to guess). Install the ntfy app on your phone and subscribe to that topic.
+3. Pick a private ntfy topic name, for example `nyc-housing` plus a few random characters (anyone who knows it can read it, so make it hard to guess). Install the ntfy app on your phone and subscribe to that topic.
 4. In the repo go to Settings > Secrets and variables > Actions and add these **repository secrets**:
    - `CONFIG_JSON`: the full contents of your `config.local.json`
    - `NTFY_TOPIC`: your topic name

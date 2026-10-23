@@ -1,0 +1,10 @@
+{
+  "household_size": 1,
+  "annual_income": 75000,
+  "assets": 20000,
+  "exclude_boroughs": ["SI"],
+  "likely_bands": ["middle", "above"],
+  "maybe_bands": ["moderate"],
+  "bedrooms": ["studio", "1br"],
+  "reminder_days": 3
+}

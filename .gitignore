@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+
+# Personal filters (income, assets). Kept out of git; see config.example.json
+config.local.json

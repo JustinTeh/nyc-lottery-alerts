@@ -3,3 +3,6 @@ __pycache__/
 
 # Personal filters (income, assets). Kept out of git; see config.example.json
 config.local.json
+
+# Yesterday's re-rental page text (kept in a private Actions cache instead)
+.rerental_cache/

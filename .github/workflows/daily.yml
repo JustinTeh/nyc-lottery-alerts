@@ -34,3 +34,28 @@ jobs:
           git config user.email "lottery-bot@users.noreply.github.com"
           git add seen.json || true
           git diff --cached --quiet || (git commit -m "Update seen lotteries" && git push)
+      # Re-rental pages from HPD's list. Runs even if the lottery step above had a problem.
+      # Yesterday's page text lives in a private Actions cache, not in the (public) repo.
+      - name: Restore re-rental snapshots
+        if: always()
+        uses: actions/cache/restore@v4
+        with:
+          path: .rerental_cache
+          key: rerentals-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: rerentals-
+      - name: Check re-rental pages
+        if: always()
+        env:
+          NTFY_TOPIC: ${{ secrets.NTFY_TOPIC }}
+          SMTP_HOST: ${{ secrets.SMTP_HOST }}
+          SMTP_PORT: ${{ secrets.SMTP_PORT }}
+          SMTP_USER: ${{ secrets.SMTP_USER }}
+          SMTP_PASS: ${{ secrets.SMTP_PASS }}
+          EMAIL_TO: ${{ secrets.EMAIL_TO }}
+        run: python rerental_watch.py
+      - name: Save re-rental snapshots
+        if: always()
+        uses: actions/cache/save@v4
+        with:
+          path: .rerental_cache
+          key: rerentals-${{ github.run_id }}-${{ github.run_attempt }}

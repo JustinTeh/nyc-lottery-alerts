@@ -30,6 +30,22 @@ python3 lottery_alerts.py --config config.example.json --hc-fixture sample_hc.js
 python3 lottery_alerts.py --dry-run                                                          # live, sends nothing
 ```
 
+## Re-rental pages (HPD's list)
+
+Besides lotteries, HPD's [re-rentals page](https://www.nyc.gov/site/hpd/services-and-information/find-affordable-housing-re-rentals.page) points to about 36 property managers and nonprofits that post vacant affordable units on their own websites. Each one uses a different layout, so `rerental_watch.py` doesn't try to understand them all. Once a day it:
+
+1. checks each site's `robots.txt` and skips pages that ask bots to stay away,
+2. downloads each page once and pulls out the readable text,
+3. compares it with yesterday's text and shows only the **new** lines that look like listings (unit sizes, rents, income limits, "available"),
+4. lists the pages it couldn't read: blocked, down, or built with JavaScript so there is no text to read.
+
+The first run sends one message saying how many pages it can read and which it can't. After that you only hear about new postings or a page that stops or starts working. It makes two small requests per site per day (`robots.txt` and the page) and pauses between sites.
+
+- The pages are listed in `sources.json`. Add a page, remove one, or set `"enabled": false` to turn one off. StreetEasy and AffordableHousing.com are off because big commercial sites tend to block bots.
+- Yesterday's text is kept in a private GitHub Actions cache, not committed to this public repo. If the cache expires (GitHub deletes caches unused for 7 days), the next run just rebuilds the baseline.
+- The digest does not filter by your income or assets, because these pages don't share a format. Open the page, check the income range for your household size and the asset limit, and apply quickly, since re-rentals are usually first-come, first-served.
+- Run the offline tests with `python3 -m unittest -v`.
+
 ## Things to know
 
 - **Always check the listing.** Housing Connect's list gives one income range across all household sizes and no asset limits. Open each listing's Available Units table to confirm your income fits your household size and your assets are under the asset limit.
